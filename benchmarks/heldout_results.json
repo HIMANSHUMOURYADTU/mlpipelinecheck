@@ -1,0 +1,880 @@
+{
+  "cases": [
+    {
+      "actual": [
+        "DATA.TARGET_COPY_FEATURE"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "DATA.TARGET_COPY_FEATURE"
+      ],
+      "family": "dataset",
+      "name": "exact_target_copy",
+      "passed": true,
+      "rationale": "mirror is float(churn) on every row, and it is part of the default feature set.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "DATA.TARGET_IN_FEATURES"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "DATA.TARGET_IN_FEATURES"
+      ],
+      "family": "dataset",
+      "name": "target_listed_as_feature",
+      "passed": true,
+      "rationale": "feature_columns explicitly lists churn, the target. The label is that caller choice, not a detector result.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [],
+      "coverage_gap": "No rule claims affine or noisy target derivatives. This is a coverage gap, not a miss of the exact-copy rule.",
+      "expected": [],
+      "family": "dataset",
+      "name": "doubled_target_is_not_an_exact_copy",
+      "passed": true,
+      "rationale": "twice is 2*churn. The zero rows match and the one rows do not, so the column is not an exact copy.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [],
+      "coverage_gap": "A strong legitimate association is not labeled as leakage.",
+      "expected": [],
+      "family": "dataset",
+      "name": "legitimate_correlation",
+      "passed": true,
+      "rationale": "score moves with churn and is not equal to it. Correlation is not an exact copy.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "DATA.MISSING_VALUES"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "DATA.MISSING_VALUES"
+      ],
+      "family": "dataset",
+      "name": "missing_value",
+      "passed": true,
+      "rationale": "One age cell is missing. The default threshold flags any positive missing fraction.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "family": "dataset",
+      "name": "non_finite_value",
+      "passed": true,
+      "rationale": "One age cell is positive infinity.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "family": "dataset",
+      "name": "class_imbalance",
+      "passed": true,
+      "rationale": "18 of 20 labels are 0, so the minority fraction is 0.1, which meets the default <= 0.1 rule.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "family": "dataset",
+      "name": "one_class_target",
+      "passed": true,
+      "rationale": "Every label is 0.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "DATA.HIGH_CARDINALITY_FEATURE"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "DATA.HIGH_CARDINALITY_FEATURE"
+      ],
+      "family": "dataset",
+      "name": "undeclared_identifier",
+      "passed": true,
+      "rationale": "code has 25 distinct values in 25 rows. The documented heuristic flags a non-float column at or above unique ratio 0.95 with at least 20 uniques and 20 rows.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": false
+    },
+    {
+      "actual": [],
+      "coverage_gap": "",
+      "expected": [],
+      "family": "dataset",
+      "name": "declared_id_and_unique_float",
+      "passed": true,
+      "rationale": "code is declared as an identifier. measurement is a float, which the default heuristic skips.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": false
+    },
+    {
+      "actual": [
+        "DATA.DUPLICATE_ROWS"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "DATA.DUPLICATE_ROWS"
+      ],
+      "family": "dataset",
+      "name": "benign_repeated_measurement",
+      "passed": true,
+      "rationale": "Two rows are exact copies. That is a duplicate-row fact. It is not, by the rule text, proof of leakage.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "DATA.CONSTANT_FEATURE"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "DATA.CONSTANT_FEATURE"
+      ],
+      "family": "dataset",
+      "name": "constant_feature",
+      "passed": true,
+      "rationale": "fixed has one non-null value. That is the exact-constant branch of DATA.CONSTANT_FEATURE.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": false
+    },
+    {
+      "actual": [
+        "DATA.EMPTY_DATASET"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "DATA.EMPTY_DATASET"
+      ],
+      "family": "dataset",
+      "name": "empty_dataset",
+      "passed": true,
+      "rationale": "The table has column names and no rows.",
+      "rules_checked": [
+        "DATA.EMPTY_DATASET",
+        "DATA.MISSING_VALUES",
+        "DATA.DUPLICATE_ROWS",
+        "DATA.CONSTANT_FEATURE",
+        "DATA.HIGH_CARDINALITY_FEATURE",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.CLASS_IMBALANCE",
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "SPLIT.GROUP_OVERLAP"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "SPLIT.GROUP_OVERLAP"
+      ],
+      "family": "split",
+      "name": "exact_row_and_group_copy",
+      "passed": true,
+      "rationale": "The first four test rows are copied from train, including customer_id, so both the row fingerprint and the group overlap.",
+      "rules_checked": [
+        "SPLIT.SCHEMA_MISMATCH",
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "DATA.DUPLICATE_ROWS",
+        "SPLIT.GROUP_OVERLAP",
+        "SPLIT.TIME_ORDER_VIOLATION",
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT",
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT",
+        "SPLIT.SMALL_TEST_PARTITION",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.MISSING_VALUES",
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "SPLIT.GROUP_OVERLAP"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "SPLIT.GROUP_OVERLAP"
+      ],
+      "family": "split",
+      "name": "group_overlap_without_row_copy",
+      "passed": true,
+      "rationale": "customer_id values match, while age is shifted by 1 and churn is flipped, so the full rows differ.",
+      "rules_checked": [
+        "SPLIT.SCHEMA_MISMATCH",
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "DATA.DUPLICATE_ROWS",
+        "SPLIT.GROUP_OVERLAP",
+        "SPLIT.TIME_ORDER_VIOLATION",
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT",
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT",
+        "SPLIT.SMALL_TEST_PARTITION",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.MISSING_VALUES",
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "SPLIT.TIME_ORDER_VIOLATION"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "SPLIT.TIME_ORDER_VIOLATION"
+      ],
+      "family": "split",
+      "name": "reversed_time_order",
+      "passed": true,
+      "rationale": "Every test date is in 2023 and every training date is in 2024, so the test is before the training maximum.",
+      "rules_checked": [
+        "SPLIT.SCHEMA_MISMATCH",
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "DATA.DUPLICATE_ROWS",
+        "SPLIT.GROUP_OVERLAP",
+        "SPLIT.TIME_ORDER_VIOLATION",
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT",
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT",
+        "SPLIT.SMALL_TEST_PARTITION",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.MISSING_VALUES",
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [],
+      "coverage_gap": "",
+      "expected": [],
+      "family": "split",
+      "name": "ordered_time_split",
+      "passed": true,
+      "rationale": "Test dates start on 2024-03-01, after the training window that starts on 2024-01-01 and lasts 8 days.",
+      "rules_checked": [
+        "SPLIT.SCHEMA_MISMATCH",
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "DATA.DUPLICATE_ROWS",
+        "SPLIT.GROUP_OVERLAP",
+        "SPLIT.TIME_ORDER_VIOLATION",
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT",
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT",
+        "SPLIT.SMALL_TEST_PARTITION",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.MISSING_VALUES",
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "SPLIT.SCHEMA_MISMATCH"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "SPLIT.SCHEMA_MISMATCH"
+      ],
+      "family": "split",
+      "name": "schema_mismatch",
+      "passed": true,
+      "rationale": "The test frame drops age. Exact overlap is not labeled because the schemas differ.",
+      "rules_checked": [
+        "SPLIT.SCHEMA_MISMATCH",
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "DATA.DUPLICATE_ROWS",
+        "SPLIT.GROUP_OVERLAP",
+        "SPLIT.TIME_ORDER_VIOLATION",
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT",
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT",
+        "SPLIT.SMALL_TEST_PARTITION",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.MISSING_VALUES",
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "DATA.DUPLICATE_ROWS"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "DATA.DUPLICATE_ROWS"
+      ],
+      "family": "split",
+      "name": "duplicate_inside_train_only",
+      "passed": true,
+      "rationale": "Train row 1 copies train row 0. Test customer ids and dates are different, so this is not a cross-partition copy.",
+      "rules_checked": [
+        "SPLIT.SCHEMA_MISMATCH",
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "DATA.DUPLICATE_ROWS",
+        "SPLIT.GROUP_OVERLAP",
+        "SPLIT.TIME_ORDER_VIOLATION",
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT",
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT",
+        "SPLIT.SMALL_TEST_PARTITION",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.MISSING_VALUES",
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT"
+      ],
+      "family": "split",
+      "name": "large_numeric_location_shift",
+      "passed": true,
+      "rationale": "Labeling rule: flag SPLIT.NUMERIC_DISTRIBUTION_SHIFT when the pooled absolute SMD is at least 0.8. Independent calculation gave 4.536007140092357.",
+      "rules_checked": [
+        "SPLIT.SCHEMA_MISMATCH",
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "DATA.DUPLICATE_ROWS",
+        "SPLIT.GROUP_OVERLAP",
+        "SPLIT.TIME_ORDER_VIOLATION",
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT",
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT",
+        "SPLIT.SMALL_TEST_PARTITION",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.MISSING_VALUES",
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "structural_case": false
+    },
+    {
+      "actual": [],
+      "coverage_gap": "",
+      "expected": [],
+      "family": "split",
+      "name": "mild_numeric_location_shift",
+      "passed": true,
+      "rationale": "Labeling rule: the same 0.8 pooled absolute SMD cutoff. Independent calculation gave 0.16680278993981895.",
+      "rules_checked": [
+        "SPLIT.SCHEMA_MISMATCH",
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "DATA.DUPLICATE_ROWS",
+        "SPLIT.GROUP_OVERLAP",
+        "SPLIT.TIME_ORDER_VIOLATION",
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT",
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT",
+        "SPLIT.SMALL_TEST_PARTITION",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.MISSING_VALUES",
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "structural_case": false
+    },
+    {
+      "actual": [
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT"
+      ],
+      "family": "split",
+      "name": "class_proportion_difference",
+      "passed": true,
+      "rationale": "Labeling rule: flag when the maximum absolute class-proportion difference is greater than 0.1. The positive-class fractions are 0.5 and 0.2, so the difference is 0.3.",
+      "rules_checked": [
+        "SPLIT.SCHEMA_MISMATCH",
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "DATA.DUPLICATE_ROWS",
+        "SPLIT.GROUP_OVERLAP",
+        "SPLIT.TIME_ORDER_VIOLATION",
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT",
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT",
+        "SPLIT.SMALL_TEST_PARTITION",
+        "DATA.TARGET_IN_FEATURES",
+        "DATA.TARGET_COPY_FEATURE",
+        "DATA.MISSING_VALUES",
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "structural_case": false
+    },
+    {
+      "actual": [],
+      "coverage_gap": "",
+      "expected": [],
+      "family": "predictions",
+      "name": "known_good_predictions",
+      "passed": true,
+      "rationale": "Forty balanced rows, matching labels, and no scores. The sample meets the default size of 30.",
+      "rules_checked": [
+        "METRIC.ACCURACY_ONLY_IMBALANCED",
+        "METRIC.INVALID_AUC_INPUT",
+        "METRIC.SMALL_EVALUATION_SAMPLE",
+        "METRIC.WIDE_CONFIDENCE_INTERVAL"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "METRIC.ACCURACY_ONLY_IMBALANCED",
+        "METRIC.INVALID_AUC_INPUT"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "METRIC.ACCURACY_ONLY_IMBALANCED",
+        "METRIC.INVALID_AUC_INPUT"
+      ],
+      "family": "predictions",
+      "name": "one_class_evaluation",
+      "passed": true,
+      "rationale": "y_true has one class and a one-dimensional score was supplied, so AUC is undefined and accuracy is not a class-wise summary.",
+      "rules_checked": [
+        "METRIC.ACCURACY_ONLY_IMBALANCED",
+        "METRIC.INVALID_AUC_INPUT",
+        "METRIC.SMALL_EVALUATION_SAMPLE",
+        "METRIC.WIDE_CONFIDENCE_INTERVAL"
+      ],
+      "structural_case": true
+    },
+    {
+      "actual": [
+        "METRIC.SMALL_EVALUATION_SAMPLE"
+      ],
+      "coverage_gap": "",
+      "expected": [
+        "METRIC.SMALL_EVALUATION_SAMPLE"
+      ],
+      "family": "predictions",
+      "name": "small_evaluation_sample",
+      "passed": true,
+      "rationale": "Five rows are below the default minimum of 30. Both classes are present and no scores are supplied.",
+      "rules_checked": [
+        "METRIC.ACCURACY_ONLY_IMBALANCED",
+        "METRIC.INVALID_AUC_INPUT",
+        "METRIC.SMALL_EVALUATION_SAMPLE",
+        "METRIC.WIDE_CONFIDENCE_INTERVAL"
+      ],
+      "structural_case": true
+    }
+  ],
+  "heuristic_micro": {
+    "false_positive_rate": 0.0,
+    "fn": 0,
+    "fp": 0,
+    "n": 44,
+    "precision": 1.0,
+    "recall": 1.0,
+    "tn": 40,
+    "tp": 4
+  },
+  "not_covered": [
+    "Near-duplicate rows and fuzzy or affine target copies are coverage gaps when the exact-copy rule is silent.",
+    "Grouped and temporal uncertainty. Those intervals are not implemented.",
+    "Real-world tables, adversarial users, and industries outside this list.",
+    "Whether a distribution shift is harmful. The numeric labels only say whether the documented SMD cutoff was crossed."
+  ],
+  "package_version": "0.2.0",
+  "rules": {
+    "DATA.CLASS_IMBALANCE": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 22,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 20,
+      "tp": 2
+    },
+    "DATA.CONSTANT_FEATURE": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "heuristic",
+      "n": 13,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 12,
+      "tp": 1
+    },
+    "DATA.DUPLICATE_ROWS": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 22,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 20,
+      "tp": 2
+    },
+    "DATA.EMPTY_DATASET": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 13,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 12,
+      "tp": 1
+    },
+    "DATA.HIGH_CARDINALITY_FEATURE": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "heuristic",
+      "n": 13,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 12,
+      "tp": 1
+    },
+    "DATA.MISSING_VALUES": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 22,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 21,
+      "tp": 1
+    },
+    "DATA.NON_FINITE_VALUES": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 13,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 12,
+      "tp": 1
+    },
+    "DATA.TARGET_COPY_FEATURE": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 22,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 21,
+      "tp": 1
+    },
+    "DATA.TARGET_IN_FEATURES": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 22,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 21,
+      "tp": 1
+    },
+    "METRIC.ACCURACY_ONLY_IMBALANCED": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 3,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 2,
+      "tp": 1
+    },
+    "METRIC.INVALID_AUC_INPUT": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 3,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 2,
+      "tp": 1
+    },
+    "METRIC.SMALL_EVALUATION_SAMPLE": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 3,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 2,
+      "tp": 1
+    },
+    "METRIC.WIDE_CONFIDENCE_INTERVAL": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 3,
+      "precision": null,
+      "recall": null,
+      "tn": 3,
+      "tp": 0
+    },
+    "SPLIT.CLASS_DISTRIBUTION_SHIFT": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "heuristic",
+      "n": 9,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 8,
+      "tp": 1
+    },
+    "SPLIT.EXACT_ROW_OVERLAP": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 9,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 8,
+      "tp": 1
+    },
+    "SPLIT.GROUP_OVERLAP": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 9,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 7,
+      "tp": 2
+    },
+    "SPLIT.NUMERIC_DISTRIBUTION_SHIFT": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "heuristic",
+      "n": 9,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 8,
+      "tp": 1
+    },
+    "SPLIT.SCHEMA_MISMATCH": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 9,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 8,
+      "tp": 1
+    },
+    "SPLIT.SMALL_TEST_PARTITION": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 9,
+      "precision": null,
+      "recall": null,
+      "tn": 9,
+      "tp": 0
+    },
+    "SPLIT.TIME_ORDER_VIOLATION": {
+      "false_positive_rate": 0.0,
+      "fn": 0,
+      "fp": 0,
+      "kind": "structural",
+      "n": 9,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tn": 8,
+      "tp": 1
+    }
+  },
+  "scope": "Held-out synthetic fixtures. Labels were assigned from the construction and from the documented thresholds before the audit result was read. This is not a measure of performance on field data.",
+  "seed": 7,
+  "structural_failures": [],
+  "structural_micro": {
+    "false_positive_rate": 0.0,
+    "fn": 0,
+    "fp": 0,
+    "n": 193,
+    "precision": 1.0,
+    "recall": 1.0,
+    "tn": 176,
+    "tp": 17
+  },
+  "validation": [
+    {
+      "actual": "EvalGuardInputError",
+      "name": "invalid_probability_shape",
+      "passed": true
+    }
+  ]
+}

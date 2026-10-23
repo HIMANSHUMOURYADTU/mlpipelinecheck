@@ -1,0 +1,57 @@
+name: TestPyPI
+
+# Manual upload to TestPyPI only. Pull requests cannot run this workflow.
+# The publish job uses the GitHub environment `testpypi` and the TestPyPI
+# legacy upload endpoint. It does not publish to https://pypi.org.
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Lint
+        run: |
+          python -m ruff check src tests benchmarks examples scripts
+          python -m ruff format --check src tests benchmarks examples scripts
+      - name: Test
+        run: python -m pytest -q
+      - name: Build a clean distribution
+        run: |
+          rm -rf dist
+          python -m build
+          python -m twine check dist/*
+      - name: Refuse the occupied PyPI name
+        run: python scripts/refuse_occupied_pypi_name.py dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-dist
+          path: dist/*
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: python-dist
+          path: dist
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/

@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mlpipelinecheck"
+version = "0.2.0"
+description = "Local, evidence-oriented audits for tabular ML evaluation integrity."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Mlpipelinecheck contributors" }]
+keywords = ["machine-learning", "evaluation", "data-quality", "train-test-split"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2",
+    "pytest>=7.4",
+    "ruff>=0.6",
+    "twine>=6.0",
+]
+
+[project.scripts]
+mlpipelinecheck = "mlpipelinecheck.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mlpipelinecheck = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+src = ["src", "tests", "benchmarks", "examples", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+# The formatter wraps code. Remaining long lines are mostly finding text.
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"examples/*" = ["E402"]

@@ -1,0 +1,530 @@
+{
+  "package_version": "0.2.0",
+  "seed": 42,
+  "scope": "Labeled synthetic fixtures constructed for this repository. Heuristic thresholds match the detector defaults, so the score is a regression check on this list, not a field accuracy estimate. A precision or recall of 1.000 often comes from a single labeled fixture. DATA.CONSTANT_FEATURE is grouped with the heuristics because that id also covers near-constant columns; an exact one-value column remains a high-confidence finding.",
+  "cases": [
+    {
+      "name": "known_good_dataset",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [],
+      "actual": [],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "exact_duplicate_rows",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [
+        "DATA.DUPLICATE_ROWS"
+      ],
+      "actual": [
+        "DATA.DUPLICATE_ROWS"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "exact_target_copy",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [
+        "DATA.TARGET_COPY_FEATURE"
+      ],
+      "actual": [
+        "DATA.TARGET_COPY_FEATURE"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "target_included_as_feature",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [
+        "DATA.TARGET_IN_FEATURES"
+      ],
+      "actual": [
+        "DATA.TARGET_IN_FEATURES"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "missing_values",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [
+        "DATA.MISSING_VALUES"
+      ],
+      "actual": [
+        "DATA.MISSING_VALUES"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "class_imbalance",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "actual": [
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "one_class_target",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "actual": [
+        "DATA.CLASS_IMBALANCE"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "non_finite_value",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "actual": [
+        "DATA.NON_FINITE_VALUES"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "empty_dataset",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [
+        "DATA.EMPTY_DATASET"
+      ],
+      "actual": [
+        "DATA.EMPTY_DATASET"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "constant_feature",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [
+        "DATA.CONSTANT_FEATURE"
+      ],
+      "actual": [
+        "DATA.CONSTANT_FEATURE"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "benign_high_cardinality_float_and_declared_id",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [],
+      "actual": [],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "undeclared_high_cardinality_code",
+      "audit": "dataset",
+      "passed": true,
+      "expected": [
+        "DATA.HIGH_CARDINALITY_FEATURE"
+      ],
+      "actual": [
+        "DATA.HIGH_CARDINALITY_FEATURE"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "known_good_split",
+      "audit": "split",
+      "passed": true,
+      "expected": [],
+      "actual": [],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "exact_duplicate_train_test_records",
+      "audit": "split",
+      "passed": true,
+      "expected": [
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "SPLIT.GROUP_OVERLAP"
+      ],
+      "actual": [
+        "SPLIT.EXACT_ROW_OVERLAP",
+        "SPLIT.GROUP_OVERLAP"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "overlapping_group_ids",
+      "audit": "split",
+      "passed": true,
+      "expected": [
+        "SPLIT.GROUP_OVERLAP"
+      ],
+      "actual": [
+        "SPLIT.GROUP_OVERLAP"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "temporal_split_order_violation",
+      "audit": "split",
+      "passed": true,
+      "expected": [
+        "SPLIT.TIME_ORDER_VIOLATION"
+      ],
+      "actual": [
+        "SPLIT.TIME_ORDER_VIOLATION"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "benign_temporal_order",
+      "audit": "split",
+      "passed": true,
+      "expected": [],
+      "actual": [],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "text_does_not_equal_number",
+      "audit": "split",
+      "passed": true,
+      "expected": [],
+      "actual": [],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "schema_mismatch",
+      "audit": "split",
+      "passed": true,
+      "expected": [
+        "SPLIT.SCHEMA_MISMATCH"
+      ],
+      "actual": [
+        "SPLIT.SCHEMA_MISMATCH"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "small_test_partition",
+      "audit": "split",
+      "passed": true,
+      "expected": [
+        "SPLIT.SMALL_TEST_PARTITION"
+      ],
+      "actual": [
+        "SPLIT.SMALL_TEST_PARTITION"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "legitimate_train_test_distribution_change",
+      "audit": "split",
+      "passed": true,
+      "expected": [
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT"
+      ],
+      "actual": [
+        "SPLIT.NUMERIC_DISTRIBUTION_SHIFT"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "benign_mild_numeric_shift",
+      "audit": "split",
+      "passed": true,
+      "expected": [],
+      "actual": [],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "class_proportion_difference",
+      "audit": "split",
+      "passed": true,
+      "expected": [
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT"
+      ],
+      "actual": [
+        "SPLIT.CLASS_DISTRIBUTION_SHIFT"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "known_good_predictions",
+      "audit": "predictions",
+      "passed": true,
+      "expected": [],
+      "actual": [],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "one_class_evaluation",
+      "audit": "predictions",
+      "passed": true,
+      "expected": [
+        "METRIC.ACCURACY_ONLY_IMBALANCED",
+        "METRIC.INVALID_AUC_INPUT"
+      ],
+      "actual": [
+        "METRIC.ACCURACY_ONLY_IMBALANCED",
+        "METRIC.INVALID_AUC_INPUT"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    },
+    {
+      "name": "small_evaluation_sample",
+      "audit": "predictions",
+      "passed": true,
+      "expected": [
+        "METRIC.SMALL_EVALUATION_SAMPLE"
+      ],
+      "actual": [
+        "METRIC.SMALL_EVALUATION_SAMPLE"
+      ],
+      "false_positives": [],
+      "false_negatives": []
+    }
+  ],
+  "rules": {
+    "DATA.CLASS_IMBALANCE": {
+      "kind": "structural",
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "DATA.CONSTANT_FEATURE": {
+      "kind": "heuristic",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "DATA.DUPLICATE_ROWS": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "DATA.EMPTY_DATASET": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "DATA.HIGH_CARDINALITY_FEATURE": {
+      "kind": "heuristic",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "DATA.MISSING_VALUES": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "DATA.NON_FINITE_VALUES": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "DATA.TARGET_COPY_FEATURE": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "DATA.TARGET_IN_FEATURES": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "METRIC.ACCURACY_ONLY_IMBALANCED": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "METRIC.INVALID_AUC_INPUT": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "METRIC.SMALL_EVALUATION_SAMPLE": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "SPLIT.CLASS_DISTRIBUTION_SHIFT": {
+      "kind": "heuristic",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "SPLIT.EXACT_ROW_OVERLAP": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "SPLIT.GROUP_OVERLAP": {
+      "kind": "structural",
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "SPLIT.NUMERIC_DISTRIBUTION_SHIFT": {
+      "kind": "heuristic",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "SPLIT.SCHEMA_MISMATCH": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "SPLIT.SMALL_TEST_PARTITION": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "SPLIT.TIME_ORDER_VIOLATION": {
+      "kind": "structural",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    }
+  },
+  "structural": {
+    "tp": 17,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "heuristic": {
+    "tp": 4,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "benign_false_positives": [],
+  "validation_cases": [
+    {
+      "name": "invalid_probability_shape",
+      "expected": "EvalGuardInputError",
+      "actual": "EvalGuardInputError",
+      "passed": true
+    }
+  ],
+  "scale": [
+    {
+      "n_rows": 2000,
+      "dataset_audit": {
+        "seconds": 0.1782334999879822,
+        "tracemalloc_peak_bytes": 420977
+      },
+      "split_audit": {
+        "seconds": 0.32059739995747805,
+        "tracemalloc_peak_bytes": 347980
+      }
+    },
+    {
+      "n_rows": 10000,
+      "dataset_audit": {
+        "seconds": 0.7156719999620691,
+        "tracemalloc_peak_bytes": 1880049
+      },
+      "split_audit": {
+        "seconds": 1.6913057999918237,
+        "tracemalloc_peak_bytes": 2403172
+      }
+    }
+  ],
+  "not_covered": [
+    "Near-duplicate rows, fuzzy target copies, and correlation proxies.",
+    "Bootstrap interval calibration. Intervals are not implemented.",
+    "Grouped or temporal dependence in metric uncertainty.",
+    "Real-world datasets, multiple industries, or adversarial users outside this list.",
+    "Whether a flagged distribution shift is harmful. The fixture only says the means differ.",
+    "Notebook, image, text, and deep-learning evaluation."
+  ]
+}
