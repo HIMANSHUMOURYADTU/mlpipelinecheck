@@ -20,7 +20,7 @@ This repository must not be published as `evalguard`. That would impersonate the
 
 ## What this workspace already verified
 
-Local build, `twine check`, and a clean-install audit are recorded in the release notes for the commands that were actually run. The GitHub Actions files have not been executed. No TestPyPI upload has been made. No official PyPI upload has been made. No git tag or GitHub Release has been created from this workspace.
+Local build, `twine check`, and a clean-install audit passed before the rename. After the rename, GitHub Actions on Python 3.10, 3.11, and 3.12 passed: https://github.com/HIMANSHUMOURYADTU/mlpipelinecheck/actions/runs/39958471299. TestPyPI has `mlpipelinecheck` 0.2.0, and a clean environment imported that version. No official PyPI upload has been made. No git tag or GitHub Release has been created.
 
 ## One-time accounts
 
@@ -52,7 +52,7 @@ python scripts/refuse_occupied_pypi_name.py dist
 
 On Windows PowerShell, replace `rm -rf dist build` with `Remove-Item -Recurse -Force dist, build`.
 
-`twine check` reads the built metadata. It does not upload. The name script must print that the directory does not use the occupied name before any upload. Today it exits 1. That is the expected result until the rename.
+`twine check` reads the built metadata. It does not upload. The name script must print that the directory does not use the occupied name before any upload. For the `mlpipelinecheck` distributions it exits 0.
 
 Install the wheel in a new virtual environment and run one audit before uploading. Dependencies come from PyPI. The package under test comes from the local wheel.
 
@@ -60,17 +60,15 @@ Install the wheel in a new virtual environment and run one audit before uploadin
 
 Do this only after the name script exits 0, and only with your own TestPyPI account.
 
-Pending publisher, from the account sidebar on https://test.pypi.org/ because the project does not exist yet:
+This upload already succeeded. The project page is https://test.pypi.org/project/mlpipelinecheck/ and the files are `mlpipelinecheck-0.2.0-py3-none-any.whl` and `mlpipelinecheck-0.2.0.tar.gz`. The publisher that performed it is:
 
-- PyPI project name: the name you put in `pyproject.toml`
-- Owner: the GitHub user or organization that will own the repository
-- Repository name: that repository, without the owner
-- Workflow name: `release.yml`
+- PyPI project name: `mlpipelinecheck`
+- Owner: `HIMANSHUMOURYADTU`
+- Repository name: `mlpipelinecheck`
+- Workflow name: `testpypi.yml`
 - Environment name: `testpypi`
 
-The owner and repository are not filled in here because this workspace has no git remote.
-
-Trusted Publishing on TestPyPI uses the same action with `repository-url: https://test.pypi.org/legacy/` and a GitHub environment named `testpypi`. The workflow in this repository publishes only to production PyPI, and only after the name gate. For a manual TestPyPI upload:
+`.github/workflows/testpypi.yml` is manual (`workflow_dispatch` only). It publishes to `https://test.pypi.org/legacy/`. `.github/workflows/release.yml` publishes to pypi.org and must not be used for another TestPyPI trial. For a manual TestPyPI upload of a new version:
 
 ```bash
 python -m twine upload --repository testpypi dist/*

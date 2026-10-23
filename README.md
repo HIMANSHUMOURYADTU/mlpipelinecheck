@@ -4,15 +4,17 @@ Mlpipelinecheck is a local Python library that audits tabular datasets, explicit
 
 It does not prove that a model or a split is free of leakage. Heuristic signals are labeled as such. The package does not train estimators, send data over the network, or include raw rows in reports.
 
-This repository is the 0.2.0 implementation described in `EvalGuard_PRD.md`, published under the name `mlpipelinecheck`. It is not on PyPI yet. `pip install evalguard` installs a different project: https://pypi.org/project/evalguard/ is an agent-output validator owned by another account. Install this checkout instead:
+This repository is the 0.2.0 implementation described in `EvalGuard_PRD.md`, published under the name `mlpipelinecheck`. Install it with:
 
 ```bash
-python -m pip install -e ".[dev]"
+python -m pip install mlpipelinecheck
 ```
 
-The upload steps, the name check, and the release workflow are in `docs/publishing.md`. No upload has been run.
+`pip install evalguard` installs a different project: https://pypi.org/project/evalguard/ is an agent-output validator owned by another account.
 
-Python 3.10+ is required. After the rename, Python 3.11.9 and Python 3.10.20 each passed 70 tests. Python 3.12.13 passed 70 tests before this rename and was not run again under the new import name. The GitHub Actions workflows are configured for 3.10, 3.11, and 3.12 and have not been executed. This directory is not a git repository.
+A local checkout, including the tests, installs with `python -m pip install -e ".[dev]"`. The upload steps are in `docs/publishing.md`. Version 0.2.0 is on TestPyPI. The official PyPI release is created by the `release.yml` workflow.
+
+Python 3.10+ is required. GitHub Actions passed on Python 3.10, 3.11, and 3.12. A clean install of 0.2.0 from TestPyPI imported successfully. The repository is https://github.com/HIMANSHUMOURYADTU/mlpipelinecheck.
 
 ## Quick start
 
@@ -81,9 +83,9 @@ The same local run recorded development-list wall time of 0.178s for a 2,000-row
 
 ## Citation
 
-There is no DOI and there is no official PyPI release of this tree. Until one exists:
+There is no DOI. Cite this release as:
 
-mlpipelinecheck contributors. (2026). mlpipelinecheck (Version 0.2.0) [Computer software]. Unpublished source checkout.
+mlpipelinecheck contributors. (2026). mlpipelinecheck (Version 0.2.0) [Computer software]. https://github.com/HIMANSHUMOURYADTU/mlpipelinecheck
 
 Do not cite https://pypi.org/project/evalguard/ for this software. That page is the other project.
 
