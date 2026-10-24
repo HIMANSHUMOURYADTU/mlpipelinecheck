@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How mlpipelinecheck works</title>
+  <style>
+    :root {
+      --ink: #1d1a16;
+      --muted: #5c564c;
+      --paper: #f4f1ea;
+      --card: #fffdf8;
+      --line: #d9d1c3;
+      --dataset: #e7f0e4;
+      --split: #e7eef6;
+      --pred: #f8efe2;
+      --gate: #f3e4e1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    }
+    main { max-width: 980px; margin: 0 auto; padding: 2.2rem 1.25rem 3rem; }
+    h1, h2, h3, .kicker, .box strong, .arrow {
+      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    h1 { font-size: 2rem; line-height: 1.2; margin: 0.2rem 0 0.6rem; }
+    h2 { font-size: 1.15rem; margin: 2rem 0 0.7rem; }
+    p { line-height: 1.5; }
+    .kicker { letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); font-size: 0.78rem; margin: 0; }
+    .lede { font-size: 1.12rem; max-width: 42rem; }
+    .flow { display: grid; gap: 0.55rem; justify-items: center; margin-top: 1.4rem; }
+    .box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      width: min(100%, 640px);
+    }
+    .box strong { display: block; margin-bottom: 0.2rem; }
+    .box span, .lane span, .out span { color: var(--muted); }
+    .arrow { color: var(--muted); font-size: 1.2rem; line-height: 1; }
+    .lanes, .outs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; width: min(100%, 920px); }
+    .lane, .out {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.85rem 0.9rem;
+    }
+    .dataset { background: var(--dataset); }
+    .split { background: var(--split); }
+    .pred { background: var(--pred); }
+    .gate { background: var(--gate); }
+    ul { margin: 0.35rem 0 0; padding-left: 1.1rem; }
+    li { margin: 0.2rem 0; }
+    table { width: 100%; border-collapse: collapse; background: var(--card); }
+    th, td { text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); padding: 0.55rem 0.4rem; }
+    .note {
+      margin-top: 1.4rem;
+      padding: 0.9rem 1rem;
+      border-left: 4px solid #8d4b3a;
+      background: #fffdf8;
+    }
+    @media (max-width: 720px) {
+      .lanes, .outs { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="kicker">mlpipelinecheck 0.2.0</p>
+    <h1>How a table becomes a report</h1>
+    <p class="lede">The library checks the tables you already have. It looks for mistakes that make a test score look safer than it is. It stays on your computer.</p>
+
+    <div class="flow">
+      <article class="box">
+        <strong>1. You bring the table</strong>
+        <span>A CSV file from the command line, or a pandas DataFrame from Python. One call audits a dataset, a train/test split, or a file of predictions.</span>
+      </article>
+      <div class="arrow" aria-hidden="true">↓</div>
+      <article class="box">
+        <strong>2. The request is checked before any rule runs</strong>
+        <span>Duplicate column names, a missing target, and a group or time audit without the column you named are errors. The table is not rewritten, imputed, or uploaded.</span>
+      </article>
+      <div class="arrow" aria-hidden="true">↓</div>
+      <div class="lanes">
+        <article class="lane dataset">
+          <strong>Dataset</strong>
+          <span>One table and the column you want to predict.</span>
+          <ul>
+            <li>Empty table, missing values, duplicate rows</li>
+            <li>Constant and high-cardinality columns</li>
+            <li>Answer column used as an input, or copied under another name</li>
+            <li>One-class or badly unbalanced labels</li>
+          </ul>
+        </article>
+        <article class="lane split">
+          <strong>Train and test</strong>
+          <span>Two tables you already split.</span>
+          <ul>
+            <li>Same row on both sides</li>
+            <li>Same customer or other group on both sides</li>
+            <li>A test date that falls inside the training period</li>
+            <li>A large shift in labels or numbers</li>
+          </ul>
+        </article>
+        <article class="lane pred">
+          <strong>Predictions</strong>
+          <span>True answers and the model’s guesses. The model file is not opened.</span>
+          <ul>
+            <li>Accuracy, F1, AUC, log loss, Brier score</li>
+            <li>MAE, MSE, and R² for regression</li>
+            <li>Optional resampled interval for independent rows</li>
+          </ul>
+        </article>
+      </div>
+      <div class="arrow" aria-hidden="true">↓</div>
+      <article class="box">
+        <strong>3. Each hit becomes a finding</strong>
+        <span>The finding says what was measured, how serious it is, why it matters, what to do next, and what that check cannot prove. Raw rows and group ids are not copied into the report.</span>
+      </article>
+      <div class="arrow" aria-hidden="true">↓</div>
+      <div class="outs">
+        <article class="out">
+          <strong>JSON</strong>
+          <span>Sorted keys, for a script or a review. The timestamp changes each run.</span>
+        </article>
+        <article class="out">
+          <strong>HTML</strong>
+          <span>One file you can open in a browser. It does not call other sites.</span>
+        </article>
+        <article class="out gate">
+          <strong>Exit code</strong>
+          <span>0 clear, 1 a serious finding, 2 a bad input or a broken check, 3 an unexpected error.</span>
+        </article>
+      </div>
+    </div>
+
+    <h2>What sits behind it</h2>
+    <table>
+      <thead>
+        <tr><th>Piece</th><th>What it does here</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Python 3.10+</td><td>Runs the library.</td></tr>
+        <tr><td>pandas</td><td>Reads the tables you pass in.</td></tr>
+        <tr><td>numpy</td><td>Compares numbers and resamples rows when you ask for an interval.</td></tr>
+        <tr><td>scikit-learn</td><td>Computes the prediction scores. It does not train a model.</td></tr>
+        <tr><td>Python standard library</td><td>Writes JSON and HTML, parses the command, and fingerprints rows.</td></tr>
+      </tbody>
+    </table>
+
+    <p class="note">A report with no findings means these checks found nothing. It does not mean the model or the split is free of leakage. Near-duplicate rows, a column that is only correlated with the answer, notebooks, and model files are outside this version.</p>
+  </main>
+</body>
+</html>

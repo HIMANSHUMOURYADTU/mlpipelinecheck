@@ -12,9 +12,9 @@ python -m pip install mlpipelinecheck
 
 `pip install evalguard` installs a different project: https://pypi.org/project/evalguard/ is an agent-output validator owned by another account.
 
-A local checkout, including the tests, installs with `python -m pip install -e ".[dev]"`. The upload steps are in `docs/publishing.md`. Version 0.2.0 is on TestPyPI. The official PyPI release is created by the `release.yml` workflow.
+A local checkout, including the tests, installs with `python -m pip install -e ".[dev]"`. Version 0.2.0 is on PyPI and on TestPyPI. The repository is https://github.com/HIMANSHUMOURYADTU/mlpipelinecheck.
 
-Python 3.10+ is required. GitHub Actions passed on Python 3.10, 3.11, and 3.12. A clean install of 0.2.0 from TestPyPI imported successfully. The repository is https://github.com/HIMANSHUMOURYADTU/mlpipelinecheck.
+Python 3.10+ is required. GitHub Actions passed on Python 3.10, 3.11, and 3.12.
 
 ## Quick start
 
@@ -47,6 +47,51 @@ mlpipelinecheck audit-predictions predictions.csv --target true --prediction-col
 
 Exit codes: `0` no configured gate breach, `1` the gate matched, `2` invalid input or a check that could not be completed, `3` internal error. The default gate is severity `high`.
 
+## How a check runs
+
+One call does one job. You choose a dataset audit, a split audit, or a prediction audit. The library does not decide which file is the test set, and it does not train a model.
+
+```mermaid
+flowchart TD
+  input["CSV file or pandas DataFrame"] --> entry["Command line or audit_dataset, audit_split, audit_predictions"]
+  entry --> choose{"Which audit?"}
+  choose --> dataset["Dataset checks"]
+  choose --> split["Split checks"]
+  choose --> pred["Prediction checks"]
+  dataset --> findings["Findings: evidence, severity, why it matters, what to do"]
+  split --> findings
+  pred --> findings
+  findings --> report["Audit report"]
+  report --> files["JSON file and a standalone HTML page"]
+  report --> gate["Exit code 0, 1, 2, or 3"]
+```
+
+Open `docs/architecture.html` in a browser for the same picture as a single page. GitHub shows that file as source. The picture above is the one rendered on this README.
+
+The path inside the package is short:
+
+1. The command-line parser, or your Python call, builds an `AuditConfig`. Configuration files are JSON. There is no YAML dependency.
+2. The frame checks reject a non-table, duplicate column names, and a missing target, group, time, or feature column.
+3. `checks/dataset.py`, `checks/split.py`, or `checks/metrics.py` runs the rules for that audit. Each rule comes from `rules.py`.
+4. A finding stores evidence, severity, confidence, why it matters, a recommended action, and the limits of that check. Row contents and group ids are left out of the report. Column names and class names stay, because the counts cannot be read without them.
+5. `AuditReport` can write JSON through the standard library, or HTML through `html.escape`. The HTML page does not load a template package or a network asset.
+6. The severity gate counts findings at or above the chosen level. The default level is `high`. If a check errors, the command exits 2 even when a finding would also have failed the gate.
+
+## What it is built with
+
+| Piece | Role |
+|---|---|
+| Python 3.10+ | The language the library runs on |
+| pandas | Holds the tables you pass in. The frames are not rewritten |
+| numpy | Numeric comparisons and the optional resample |
+| scikit-learn | Accuracy, F1, ROC AUC, log loss, Brier score, MAE, MSE, and R². The library calls these. It does not refit a model |
+| Standard library `json`, `html`, `argparse`, and hashing | Reports, the command line, and row fingerprints |
+| pytest and ruff | Tests and lint, installed with the `dev` extra |
+| setuptools, build, and twine | Packaging and the upload check |
+| GitHub Actions | Runs lint, tests, a small benchmark, and the severity gate on Python 3.10, 3.11, and 3.12 |
+
+Nothing in the audit path sends the table to a service. A quiet report means these checks found nothing. It does not mean the evaluation is safe.
+
 ## Scope
 
 In version 0.2:
@@ -67,6 +112,7 @@ The same local run recorded development-list wall time of 0.178s for a 2,000-row
 
 ## Documentation
 
+- `docs/architecture.html`
 - `docs/quickstart.md`
 - `docs/api.md`
 - `docs/cli.md`
